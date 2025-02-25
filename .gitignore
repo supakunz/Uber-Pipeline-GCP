@@ -1,0 +1,14 @@
+# Ignore environment variable files
+.env
+
+# Ignore Data Folder/
+/data/
+
+# Ignore Logs Folder/
+/logs/
+
+# Ignore Dags Folder/
+/dags/__pycache__
+
+# Ignore Scripts Folder/
+/scripts/__pycache__
