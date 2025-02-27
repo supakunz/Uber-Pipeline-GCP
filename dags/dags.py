@@ -2,6 +2,7 @@ import sys
 import os
 from airflow import DAG
 from airflow.operators.python import PythonOperator
+from airflow.providers.google.cloud.transfers.gcs_to_bigquery import GCSToBigQueryOperator # Operator ของ Apache Airflow ที่ใช้สำหรับ ย้ายข้อมูล (Transfer Data) จาก Google Cloud Storage (GCS) ไปยัง BigQuery
 from datetime import datetime
 
 # on Docker
@@ -33,5 +34,101 @@ with DAG('uber_extract_pipeline', default_args=default_args, schedule_interval=N
         python_callable=transform_data
     )
 
+    load_task = GCSToBigQueryOperator(
+        task_id='load_data_task',
+        bucket='us-central1-uber-pipline-gc-9fb54503-bucket', # bucket name
+        source_objects=['data/uber_data_final.csv'],
+        destination_project_dataset_table='uber_dataset.uber_data',  # [DATASET].[TABLE_NAME]
+        skip_leading_rows=1,
+        schema_fields=[
+  {
+    "mode": "NULLABLE",
+    "name": "trip_id",
+    "type": "INTEGER"
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "VendorID",
+    "type": "INTEGER"
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "datetime_id",
+    "type": "INTEGER"
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "passenger_count_id",
+    "type": "INTEGER"
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "trip_distance_id",
+    "type": "INTEGER"
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "rate_code_id",
+    "type": "INTEGER"
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "store_and_fwd_flag",
+    "type": "BOOLEAN"
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "pickup_location_id",
+    "type": "INTEGER"
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "dropoff_location_id",
+    "type": "INTEGER"
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "payment_type_id",
+    "type": "INTEGER"
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "fare_amount",
+    "type": "FLOAT"
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "extra",
+    "type": "FLOAT"
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "mta_tax",
+    "type": "FLOAT"
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "tip_amount",
+    "type": "FLOAT"
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "tolls_amount",
+    "type": "FLOAT"
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "improvement_surcharge",
+    "type": "FLOAT"
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "total_amount",
+    "type": "FLOAT"
+  }
+],
+        write_disposition='WRITE_TRUNCATE', # ลบข้อมูลเดิมทั้งหมดในตาราง ก่อนจะเขียนข้อมูลชุดใหม่ลงไป
+    )
+
 # dependencies
-extract_task >> transform_task
+extract_task >> transform_task >> load_task
