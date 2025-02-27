@@ -1,5 +1,8 @@
+import os
 import pandas as pd
 from airflow.providers.postgres.hooks.postgres import PostgresHook
+
+RAW_DATA_PATH = os.getenv("raw_data_path")
 
 def extract_data():
    
@@ -22,8 +25,8 @@ def extract_data():
     # กำหนด path สำหรับบันทึก CSV
     # raw_data_path = '../data/raw_uber_data.csv'
 
-    # absolute path ใน container:
-    raw_data_path = '/opt/airflow/data/raw_uber_data.csv'
+    # absolute path
+    raw_data_path = RAW_DATA_PATH
     
     # บันทึก DataFrame ลงไฟล์ CSV
     df.to_csv(raw_data_path, index=False)

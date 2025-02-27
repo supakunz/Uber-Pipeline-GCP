@@ -4,11 +4,17 @@ from airflow import DAG
 from airflow.operators.python import PythonOperator
 from datetime import datetime
 
+# on Docker
 # เพิ่ม path ของ scripts เข้าไป
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../scripts")))
+# sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../scripts")))
+
+# on GCS
+# เพิ่ม path ของ plugins เข้าไป
+sys.path.append("/home/airflow/gcs/plugins")   
 
 from extract import extract_data
-from transform import transform_data   
+from transform import transform_data
+
 
 default_args = {
     'owner': 'airflow',

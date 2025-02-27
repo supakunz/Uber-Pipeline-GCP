@@ -1,3 +1,4 @@
+import os
 import pandas as pd
 from extract import extract_data
 # from pandasgui import show # ใช้แสดง table
@@ -6,12 +7,15 @@ from extract import extract_data
 # import matplotlib.pyplot as plt
 # import seaborn as sns
 
+RAW_DATA_PATH = os.getenv("raw_data_path")
+FINAL_DATA_PATH = os.getenv("final_data_path")
+
 def transform_data():
    
   # df = pd.read_csv('../data/raw_uber_data.csv') # แปลงข้อมูล CSV เป็น DataFrame
   
   # Path on docker
-  df = pd.read_csv('/opt/airflow/data/raw_uber_data.csv') # แปลงข้อมูล CSV เป็น DataFrame
+  df = pd.read_csv(RAW_DATA_PATH) # แปลงข้อมูล CSV เป็น DataFrame
   # สามารถเปลี่ยนเป็น missing_uber_data.csv เพื่อดู data ที่มีข้อผิดพลาด
 
   # ------------- ทำ EDA(Exploratory Data Analysis) ก่อน Tranform Data -------------
@@ -193,7 +197,7 @@ def transform_data():
 
   # Save ไฟล์ CSV ไปที่ transformed_data_path ("../data/transformed_uber_data.csv")
   # final_data_path = '../data/uber_data_final.csv'
-  final_data_path = '/opt/airflow/data/uber_data_final.csv'
+  final_data_path = FINAL_DATA_PATH
   fact_table.to_csv(final_data_path, index=False)
 
   print(f"✅ Tranform Data Successed!!")
