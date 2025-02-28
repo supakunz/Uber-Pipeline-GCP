@@ -22,7 +22,7 @@ Visualization
 * PowerBI
 
 Database
-* Supabase(PostgreSQL)
+* Supabase ( PostgreSQL )
 
 ## Data Storage
 The raw data and output files are too large to store in the repository. They are stored on Google Drive.
