@@ -22,8 +22,11 @@ Google Cloud Platform:
 
 
 ## Data Storage
+The raw data and output files are too large to store in the repository. They are stored on Google Drive.
 
-The raw data files are stored in the `data` folder of the repository. These files are used as input for the processing pipeline and are essential for the overall project. 
+- **Raw data** link : https://drive.google.com/file/d/14T4HoiK9dDom7Zh5HWhqkd5PObP-QsAu/view?usp=drive_link
+
+- **Output** link : https://drive.google.com/file/d/1Ph0Bqiyb7LzqOo7dWSNTdvKG-5x1Sguf/view?usp=drive_link
 
 
 ## Data Modeling
