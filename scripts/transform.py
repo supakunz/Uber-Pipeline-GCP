@@ -168,18 +168,29 @@ def transform_data():
   # 🔹 ถ้าคอลัมน์มีชื่อตรงกันให้ใช่ on= -> จะรวมคอลัมน์เป็นอันเดียว
   
   # how -> ค่า default เป็น inner join ถ้าไม่กำหนด
-  fact_table = df.merge(passenger_count_dim, left_on='trip_id', right_on='passenger_count_id', how='inner') \
-               .merge(trip_distance_dim, left_on='trip_id', right_on='trip_distance_id') \
-               .merge(rate_code_dim, left_on='trip_id', right_on='rate_code_id') \
-               .merge(pickup_location_dim, left_on='trip_id', right_on='pickup_location_id') \
-               .merge(dropoff_location_dim, left_on='trip_id', right_on='dropoff_location_id') \
-               .merge(datetime_dim, left_on='trip_id', right_on='datetime_id') \
-               .merge(payment_type_dim, left_on='trip_id', right_on='payment_type_id') \
-               [['trip_id','VendorID','datetime_id','passenger_count_id','trip_distance_id','rate_code_id',
-                 'store_and_fwd_flag','pickup_location_id','dropoff_location_id','payment_type_id','fare_amount',
-                 'extra','mta_tax','tip_amount','tolls_amount','improvement_surcharge','total_amount'
-                 ]]
-
+  # ปัญหา เกิด _x และ _y ที่ชื่อของแต่ละ colunm
+  # fact_table = df.merge(passenger_count_dim, left_on='trip_id', right_on='passenger_count_id', how='inner') \
+  #              .merge(trip_distance_dim, left_on='trip_id', right_on='trip_distance_id') \
+  #              .merge(rate_code_dim, left_on='trip_id', right_on='rate_code_id') \
+  #              .merge(pickup_location_dim, left_on='trip_id', right_on='pickup_location_id') \
+  #              .merge(dropoff_location_dim, left_on='trip_id', right_on='dropoff_location_id') \
+  #              .merge(datetime_dim, left_on='trip_id', right_on='datetime_id') \
+  #              .merge(payment_type_dim, left_on='trip_id', right_on='payment_type_id') 
+  
+  # แก้ไข กำหนด suffixes ใน .merge() ป้องกัน _x และ _y โดยกำหนด suffixes ที่ชัดเจน
+  fact_table = df.merge(passenger_count_dim, left_on='trip_id', right_on='passenger_count_id', how='inner', suffixes=('', '_passenger')) \
+               .merge(trip_distance_dim, left_on='trip_id', right_on='trip_distance_id', suffixes=('', '_distance')) \
+               .merge(rate_code_dim, left_on='trip_id', right_on='rate_code_id', suffixes=('', '_rate')) \
+               .merge(pickup_location_dim, left_on='trip_id', right_on='pickup_location_id', suffixes=('', '_pickup')) \
+               .merge(dropoff_location_dim, left_on='trip_id', right_on='dropoff_location_id', suffixes=('', '_dropoff')) \
+               .merge(datetime_dim, left_on='trip_id', right_on='datetime_id', suffixes=('', '_datetime')) \
+               .merge(payment_type_dim, left_on='trip_id', right_on='payment_type_id', suffixes=('', '_payment')) \
+                [['VendorID','tpep_pickup_datetime','tpep_dropoff_datetime','passenger_count','trip_distance',
+                 'rate_code_name','pickup_latitude','pickup_longitude','dropoff_latitude','dropoff_longitude',
+                 'payment_type_name','fare_amount','extra','mta_tax','tip_amount','tolls_amount','improvement_surcharge',
+                 'total_amount'
+                ]]
+  
   # ตรวจสอบชื่อ cloumns ของตาราง
   # print(payment_type_dim.columns)
   # Output => Index(['payment_type_id', 'payment_type', 'payment_type_name'], dtype='object')
@@ -196,9 +207,12 @@ def transform_data():
   # show(fact_table)
 
   # Save ไฟล์ CSV ไปที่ transformed_data_path ("../data/transformed_uber_data.csv")
-  # final_data_path = '../data/uber_data_final.csv'
+  # final_data_path = '../data/new_uber_data_final.csv'
   final_data_path = FINAL_DATA_PATH
   fact_table.to_csv(final_data_path, index=False)
 
   print(f"✅ Tranform Data Successed!!")
 
+
+
+transform_data()

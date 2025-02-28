@@ -43,53 +43,58 @@ with DAG('uber_extract_pipeline', default_args=default_args, schedule_interval=N
         schema_fields=[
   {
     "mode": "NULLABLE",
-    "name": "trip_id",
-    "type": "INTEGER"
-  },
-  {
-    "mode": "NULLABLE",
     "name": "VendorID",
     "type": "INTEGER"
   },
   {
     "mode": "NULLABLE",
-    "name": "datetime_id",
+    "name": "tpep_pickup_datetime",
+    "type": "DATETIME"
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "tpep_dropoff_datetime",
+    "type": "DATETIME"
+  },
+  {
+    "mode": "NULLABLE",
+    "name": "passenger_count",
     "type": "INTEGER"
   },
   {
     "mode": "NULLABLE",
-    "name": "passenger_count_id",
-    "type": "INTEGER"
+    "name": "trip_distance",
+    "type": "FLOAT"
   },
   {
     "mode": "NULLABLE",
-    "name": "trip_distance_id",
-    "type": "INTEGER"
+    "name": "rate_code_name",
+    "type": "STRING"
   },
   {
     "mode": "NULLABLE",
-    "name": "rate_code_id",
-    "type": "INTEGER"
+    "name": "pickup_latitude",
+    "type": "FLOAT"
   },
   {
     "mode": "NULLABLE",
-    "name": "store_and_fwd_flag",
-    "type": "BOOLEAN"
+    "name": "pickup_longitude",
+    "type": "FLOAT"
   },
   {
     "mode": "NULLABLE",
-    "name": "pickup_location_id",
-    "type": "INTEGER"
+    "name": "dropoff_latitude",
+    "type": "FLOAT"
   },
   {
     "mode": "NULLABLE",
-    "name": "dropoff_location_id",
-    "type": "INTEGER"
+    "name": "dropoff_longitude",
+    "type": "FLOAT"
   },
   {
     "mode": "NULLABLE",
-    "name": "payment_type_id",
-    "type": "INTEGER"
+    "name": "payment_type_name",
+    "type": "STRING"
   },
   {
     "mode": "NULLABLE",
