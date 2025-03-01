@@ -42,6 +42,29 @@ The raw data and output files are too large to store in the repository. They are
 [<img src="https://github.com/user-attachments/assets/f3002d49-57d4-406f-b882-3d2df7a14f6d" width=70% height=70%>](https://lookerstudio.google.com/reporting/06afc17e-5b14-40be-b797-47dc3729b332)
 * The final output from Power BI can be accessed via the following link: [Download Dashboard](https://drive.google.com/file/d/1zyHMYYam206mGEXB5zWnpGLbbcIgAONA/view?usp=drive_link). Note: The dashboard reads data from a static CSV file exported from BigQuery.
 
+## ❄️ Setup
+
+1. Clone this repository :
+
+```bash
+git clone https://github.com/supakunz/Uber-Pipeline-GCP.git
+```
+
+2. Navigate to the project folder and Set up the environment variables :
+
+```
+cd Uber-Pipeline-GCP
+```
+- Create a `.env` file in the root directory.
+
+- Add the following variables to the .env file, replacing the placeholder values with your own:
+
+```
+AIRFLOW_UID = 50000
+# raw_data_path = /opt/airflow/data/raw_uber_data.csv # Path on Docker
+raw_data_path = /home/airflow/gcs/data/raw_uber_data.csv # Path on GCS
+final_data_path = /home/airflow/gcs/data/uber_data_final.csv
+```
 
 ## Contact
 Supakun Thata (supakunt.thata@gmail.com)
