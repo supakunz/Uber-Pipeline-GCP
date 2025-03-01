@@ -1,4 +1,4 @@
-# End-to-End Employee Data Engineering Pipeline on GCP
+# Uber Data Engineering Pipeline on GCP
 
 ## Project Overview
 
