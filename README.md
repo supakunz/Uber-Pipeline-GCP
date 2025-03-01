@@ -1,8 +1,6 @@
 # Uber Data Engineering Pipeline on GCP
 
-## Project Overview
-
-This is an end-to-end modern data engineering project deployed on Google Cloud Platform, including the deployment of an ETL pipeline using **Google Cloud Data Fusion** for data transformation. The transformed data is stored in **BigQuery** for analysis, and an interactive dashboard is generated using **Looker** to provide actionable insights.
+An end-to-end modern data engineering project, including deployment of an ETL pipeline on Google Cloud Platform. The data is extracted from Supabase (PostgreSQL), processed and loaded into BigQuery for analysis, and finally visualized using Power BI to generate an insight dashboard
 
 ## Architecture
 <img width="1258" alt="Project Architecture" src="https://github.com/user-attachments/assets/9d65b70c-e944-414e-acca-a062d84b4deb">
