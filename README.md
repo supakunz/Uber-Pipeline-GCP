@@ -60,10 +60,10 @@ cd Uber-Pipeline-GCP
 - Add the following variables to the .env file, replacing the placeholder values with your own:
 
 ```
-AIRFLOW_UID = 50000
-# raw_data_path = /opt/airflow/data/raw_uber_data.csv # Path on Docker
+AIRFLOW_UID = 50000 # User ID for running Airflow in Docker
+# raw_data_path = /opt/airflow/data/raw_uber_data.csv # Path if running on local Docker
 raw_data_path = /home/airflow/gcs/data/raw_uber_data.csv # Path on GCS
-final_data_path = /home/airflow/gcs/data/uber_data_final.csv
+final_data_path = /home/airflow/gcs/data/uber_data_final.csv # Processed output file path
 ```
 
 ## Contact
