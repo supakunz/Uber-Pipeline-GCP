@@ -64,5 +64,8 @@ raw_data_path = /home/airflow/gcs/data/raw_uber_data.csv # Path on GCS
 final_data_path = /home/airflow/gcs/data/uber_data_final.csv # Processed output file path
 ```
 
-## Contact
-Supakun Thata (supakunt.thata@gmail.com)
+## 🙋‍♂️ Contact
+
+Developed by **Supakun Thata**  
+📧 Email: supakunt.thata@gmail.com  
+🔗 GitHub: [SupakunZ](https://github.com/SupakunZ)
